@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `gear`.`TB_Produto` (
   `nome` VARCHAR(60) NOT NULL,
   `descricao` VARCHAR(240) NULL DEFAULT NULL,
   `preco` DECIMAL(10,2) NOT NULL,
-  `tipo` ENUM('Insumo', 'Equipamento') NOT NULL,
+  `tipo` ENUM('INSUMO', 'EQUIPAMENTO') NOT NULL,
   PRIMARY KEY (`idProduto`),
   INDEX `index` (`nome` ASC, `preco` ASC))
 ENGINE = InnoDB
