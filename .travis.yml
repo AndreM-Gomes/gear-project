@@ -10,4 +10,3 @@ script:
   - mvn install spring-boot:repackage
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
