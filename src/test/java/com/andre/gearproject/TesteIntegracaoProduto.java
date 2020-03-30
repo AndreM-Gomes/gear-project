@@ -17,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -61,9 +63,42 @@ class TesteIntegracaoProduto {
                 .andExpect(status().isOk());
 
     }
-    @DisplayName("Atualizar produto")
+    @DisplayName("Recuperar uma lista de produtos")
     @Test
     @Order(2)
+    public void recuperarListaProdutos() throws Exception{
+        Produto produto2 = new Produto();
+        produto2.setId(2);
+        produto2.setDescricao("Fita isolante anti-chama 3M");
+        produto2.setPreco(new BigDecimal("32.60"));
+        produto2.setTipo(Tipo.INSUMO);
+        produto2.setNome("Fita isolante");
+
+        mvc.perform(post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .content(om.writeValueAsString(produto)))
+                .andExpect(content().string(""))
+                .andExpect(status().isCreated());
+
+        List<Produto> listaEsperada = new ArrayList<Produto>(2);
+        listaEsperada.add(produto);
+        listaEsperada.add(produto2);
+        mvc.perform(post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .content(om.writeValueAsString(produto2)))
+                .andExpect(content().string(""))
+                .andExpect(status().isCreated());
+
+        mvc.perform(get(uri)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(om.writeValueAsString(listaEsperada.toArray())))
+                .andExpect(status().isOk());
+    }
+    @DisplayName("Atualizar produto")
+    @Test
+    @Order(3)
     public void atualizarProduto() throws Exception{
         Produto produtoAtualizado = new Produto();
         produtoAtualizado.setId(1);
@@ -83,7 +118,7 @@ class TesteIntegracaoProduto {
     }
     @DisplayName("Deletar um produto")
     @Test
-    @Order(3)
+    @Order(4)
     public void deletarProduto() throws Exception{
         mvc.perform(delete(uri + "/1")
                 .contentType(MediaType.APPLICATION_JSON))
