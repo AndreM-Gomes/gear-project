@@ -4,7 +4,7 @@
 
   Back-end REST em Spring para administração de inventários de equipes de manutenção
   
-## Completado
+## Completo
   - CRUD de **produtos** do inventário;
   
 ## TODO
