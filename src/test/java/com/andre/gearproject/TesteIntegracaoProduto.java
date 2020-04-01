@@ -3,32 +3,28 @@ package com.andre.gearproject;
 import com.andre.gearproject.produto.Produto;
 import com.andre.gearproject.produto.Tipo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = GearProjectApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @DisplayName("Controller Produto")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TesteIntegracaoProduto {
 
     @Autowired
@@ -45,7 +41,8 @@ class TesteIntegracaoProduto {
         produto.setTipo(Tipo.EQUIPAMENTO);
         produto.setPreco(new BigDecimal("42.70"));
         produto.setDescricao("Chave de fenda de aço inox");
-        produto.setId(1);
+        produto.setIdProduto(1);
+        produto.setItensEstoque(new HashSet<>());
     }
     @DisplayName("Salvar e recuperar um produto")
     @Test
@@ -68,11 +65,12 @@ class TesteIntegracaoProduto {
     @Order(2)
     public void recuperarListaProdutos() throws Exception{
         Produto produto2 = new Produto();
-        produto2.setId(2);
+        produto2.setIdProduto(2);
         produto2.setDescricao("Fita isolante anti-chama 3M");
         produto2.setPreco(new BigDecimal("32.60"));
         produto2.setTipo(Tipo.INSUMO);
         produto2.setNome("Fita isolante");
+        produto2.setItensEstoque(new HashSet<>());
 
         mvc.perform(post(uri)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -101,11 +99,12 @@ class TesteIntegracaoProduto {
     @Order(3)
     public void atualizarProduto() throws Exception{
         Produto produtoAtualizado = new Produto();
-        produtoAtualizado.setId(1);
+        produtoAtualizado.setIdProduto(1);
         produtoAtualizado.setNome("Chave Philips");
         produtoAtualizado.setTipo(Tipo.EQUIPAMENTO);
         produtoAtualizado.setPreco(new BigDecimal("42.70"));
         produtoAtualizado.setDescricao("Chave de Philips aço inox");
+        produtoAtualizado.setItensEstoque(new HashSet<>());
         mvc.perform(put(uri)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsString(produtoAtualizado)))

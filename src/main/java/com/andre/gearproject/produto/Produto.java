@@ -1,20 +1,30 @@
 package com.andre.gearproject.produto;
 
-import lombok.Data;
+import com.andre.gearproject.estoque.ItemEstoque;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
+import java.util.StringJoiner;
 
 @Entity
 @Table(name = "TB_Produto")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="idProduto")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProduto")
-    private Integer id;
+    private Integer idProduto;
 
     @NotNull
     @Column(name = "nome")
@@ -31,4 +41,27 @@ public class Produto {
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
+
+    @OneToMany(mappedBy = "produto",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<ItemEstoque> itensEstoque;
+
+    public Produto(ProdutoDTO produtoDTO){
+        this.idProduto = produtoDTO.getIdProduto();
+        this.descricao = produtoDTO.getDescricao();
+        this.itensEstoque = null;
+        this.nome = produtoDTO.getNome();
+        this.preco = produtoDTO.getPreco();
+        this.tipo = produtoDTO.getTipo();
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Produto.class.getSimpleName() + "[", "]")
+                .add("idProduto=" + idProduto)
+                .add("nome='" + nome + "'")
+                .add("descricao='" + descricao + "'")
+                .add("preco=" + preco)
+                .add("tipo=" + tipo)
+                .toString();
+    }
 }

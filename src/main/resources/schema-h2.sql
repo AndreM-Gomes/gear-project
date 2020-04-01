@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS TB_EstoqueUnidade(
   `idProduto` INT(11) NOT NULL,
   `idUnidade` INT(11) NOT NULL,
   `quantidade` INT(11) NOT NULL,
-  `situacao` ENUM('Danificado', 'Perfeito estado', 'Inutilizável') NOT NULL,
+  `situacao` ENUM('DANIFICADO','PERFEITO_ESTADO','INUTILIZAVEL') NOT NULL,
   PRIMARY KEY (idItem),
   FOREIGN KEY (`idProduto`) REFERENCES TB_Produto(`idProduto`)
     ON DELETE NO ACTION

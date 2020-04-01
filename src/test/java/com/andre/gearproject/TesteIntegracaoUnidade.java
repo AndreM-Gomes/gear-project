@@ -1,36 +1,28 @@
 package com.andre.gearproject;
 
-import com.andre.gearproject.produto.Produto;
-import com.andre.gearproject.produto.Tipo;
 import com.andre.gearproject.unidade.Unidade;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = GearProjectApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @DisplayName("Controller Unidade")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TesteIntegracaoUnidade {
 
     @Autowired
@@ -43,13 +35,14 @@ public class TesteIntegracaoUnidade {
     @BeforeAll
     public static void preparar(){
         unidade = new Unidade();
-        unidade.setId(1);
+        unidade.setIdUnidade(1);
         unidade.setNome("Sé");
+        unidade.setItensEstoque(new HashSet<>());
     }
     @DisplayName("Salvar e recuperar um produto")
     @Test
     @Order(1)
-    public void salvarUmProduto() throws Exception {
+    public void salvarUmaUnidade() throws Exception {
         mvc.perform(post(uri)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8")
@@ -65,10 +58,11 @@ public class TesteIntegracaoUnidade {
     @DisplayName("Recuperar uma lista de produtos")
     @Test
     @Order(2)
-    public void recuperarListaProdutos() throws Exception{
+    public void recuperarListaUnidades() throws Exception{
         Unidade unidade1 = new Unidade();
-        unidade1.setId(2);
+        unidade1.setIdUnidade(2);
         unidade1.setNome("Santa Cecília");
+        unidade1.setItensEstoque(new HashSet<>());
 
         mvc.perform(post(uri)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -95,10 +89,11 @@ public class TesteIntegracaoUnidade {
     @DisplayName("Atualizar produto")
     @Test
     @Order(3)
-    public void atualizarProduto() throws Exception{
+    public void atualizarUnidade() throws Exception{
         Unidade unidadeAtualizada = new Unidade();
-        unidadeAtualizada.setId(1);
+        unidadeAtualizada.setIdUnidade(1);
         unidadeAtualizada.setNome("Marechal Deodoro");
+        unidadeAtualizada.setItensEstoque(new HashSet<>());
         mvc.perform(put(uri)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(unidadeAtualizada)))
@@ -112,7 +107,7 @@ public class TesteIntegracaoUnidade {
     @DisplayName("Deletar um produto")
     @Test
     @Order(4)
-    public void deletarProduto() throws Exception{
+    public void deletarUnidade() throws Exception{
         mvc.perform(delete(uri + "/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

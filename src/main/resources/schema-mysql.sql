@@ -47,11 +47,12 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `gear`.`TB_EstoqueUnidade` (
+    idItem INT(11) NOT NULL,
   `idProduto` INT(11) NOT NULL,
   `idUnidade` INT(11) NOT NULL,
   `quantidade` INT(11) NOT NULL,
-  `situacao` ENUM('Danificado', 'Perfeito estado', 'Inutilizável') NOT NULL,
-  PRIMARY KEY (`idProduto`, `idUnidade`),
+  `situacao` ENUM('DANIFICADO','PERFEITO_ESTADO','INUTILIZAVEL') NOT NULL,
+  PRIMARY KEY (idItem),
   INDEX `fk_TB_Produto_has_TB_Unidade_TB_Unidade1_idx` (`idUnidade` ASC),
   INDEX `fk_TB_Produto_has_TB_Unidade_TB_Produto1_idx` (`idProduto` ASC),
   CONSTRAINT `fk_TB_Produto_has_TB_Unidade_TB_Produto1`

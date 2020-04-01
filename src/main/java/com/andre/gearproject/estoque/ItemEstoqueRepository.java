@@ -1,15 +1,16 @@
-package com.andre.gearproject.unidade;
+package com.andre.gearproject.estoque;
 
+import com.andre.gearproject.unidade.Unidade;
+import com.andre.gearproject.unidade.UnidadeDTO;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
-public interface UnidadeRepository extends CrudRepository<Unidade,Integer> {
+public interface ItemEstoqueRepository extends CrudRepository<ItemEstoque,Integer> {
 
-    @Query("select u from Unidade u join fetch u.itensEstoque i join fetch i.produto")
-    List<Unidade> encontrarTodos();
 }
