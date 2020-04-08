@@ -54,14 +54,4 @@ public class Produto {
         this.tipo = produtoDTO.getTipo();
     }
 
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Produto.class.getSimpleName() + "[", "]")
-                .add("idProduto=" + idProduto)
-                .add("nome='" + nome + "'")
-                .add("descricao='" + descricao + "'")
-                .add("preco=" + preco)
-                .add("tipo=" + tipo)
-                .toString();
-    }
 }

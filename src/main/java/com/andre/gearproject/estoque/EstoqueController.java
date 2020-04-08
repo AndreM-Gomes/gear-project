@@ -3,6 +3,7 @@ package com.andre.gearproject.estoque;
 import com.andre.gearproject.unidade.Unidade;
 import com.andre.gearproject.unidade.UnidadeDTO;
 import com.andre.gearproject.unidade.UnidadeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,11 @@ public class EstoqueController {
     }
 
     @PostMapping("/{id}/estoque")
-    ResponseEntity salvarItemEstoque(@PathVariable Integer id,@RequestBody ItemEstoque itemEstoque){
-        System.out.println(itemEstoque);
+    ResponseEntity salvarItemEstoque(@PathVariable Integer id,@RequestBody ItemEstoqueDTO itemEstoque){
         return itemEstoqueService.salvarItemEstoque(id,itemEstoque);
+    }
+    @DeleteMapping("/{id}/estoque")
+    ResponseEntity deletarItemEstoque(@PathVariable Integer id){
+        return itemEstoqueService.deleteItemEstoque(id);
     }
 }

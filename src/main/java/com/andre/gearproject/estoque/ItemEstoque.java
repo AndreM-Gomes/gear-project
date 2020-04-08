@@ -48,14 +48,4 @@ public class ItemEstoque {
     @Column(name = "situacao")
     @Enumerated(EnumType.STRING)
     private Situacao situcao;
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", ItemEstoque.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("produto=" + produto)
-                .add("quantidade=" + quantidade)
-                .add("situcao=" + situcao)
-                .toString();
-    }
 }

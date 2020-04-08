@@ -30,20 +30,11 @@ public class Unidade {
     @Column(name = "nome")
     private String nome;
 
-    @OneToMany(mappedBy = "unidade",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "unidade",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<ItemEstoque> itensEstoque;
 
     public Unidade(UnidadeDTO unidadeDTO){
         this.idUnidade = unidadeDTO.getIdUnidade();
         this.nome = unidadeDTO.getNome();
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Unidade.class.getSimpleName() + "[", "]")
-                .add("idUnidade=" + idUnidade)
-                .add("nome='" + nome + "'")
-                .add("itensEstoque=" + itensEstoque)
-                .toString();
     }
 }
