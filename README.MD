@@ -6,10 +6,11 @@
   Projeto com propósito de exercício no uso da stack Spring.
 ## Completo
   - CRUD de **produtos** do inventário;
-  
-## TODO
   - CRUD de **unidades**("sede" das equipes);
   - CRUD de **itens** dos estoques;
+  
+## TODO
+
   - Transferência de itens entre unidades;
   - CRUD de **funcionários**;
   - CRUD de **ordens de serviço**;
