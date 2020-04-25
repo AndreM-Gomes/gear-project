@@ -47,7 +47,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `gear`.`TB_EstoqueUnidade` (
-    idItem INT(11) NOT NULL,
+    idItem INT(11) NOT NULL AUTO_INCREMENT,
   `idProduto` INT(11) NOT NULL,
   `idUnidade` INT(11) NOT NULL,
   `quantidade` INT(11) NOT NULL,

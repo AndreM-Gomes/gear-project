@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Set;
 
-@Value
 public class ProdutoDTO {
     private Integer idProduto;
     private String nome;
@@ -30,5 +29,45 @@ public class ProdutoDTO {
         this.descricao = produto.getDescricao();
         this.preco = produto.getPreco();
         this.tipo = produto.getTipo();
+    }
+
+    public Integer getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Integer idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 }

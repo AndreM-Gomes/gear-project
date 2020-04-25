@@ -25,6 +25,7 @@ public class UnidadeController {
     ResponseEntity<List<Unidade>> recuperarTodasUnidades(){
         return unidadeService.recuperarTodasUnidades();
     }
+
     @GetMapping(value = "/{id}")
     ResponseEntity<Unidade> recuperarUnidadeId(@PathVariable Integer id){
         return unidadeService.retornaUnidadeId(id);

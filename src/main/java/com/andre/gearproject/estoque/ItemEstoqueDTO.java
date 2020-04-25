@@ -8,7 +8,6 @@ import lombok.Value;
 
 import javax.persistence.*;
 
-@Value
 public class ItemEstoqueDTO {
     private Integer id;
 
@@ -36,4 +35,43 @@ public class ItemEstoqueDTO {
         this.situcao = itemEstoque.getSitucao();
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public ProdutoDTO getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoDTO produto) {
+        this.produto = produto;
+    }
+
+    public UnidadeDTO getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(UnidadeDTO unidade) {
+        this.unidade = unidade;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Situacao getSitucao() {
+        return situcao;
+    }
+
+    public void setSitucao(Situacao situcao) {
+        this.situcao = situcao;
+    }
 }

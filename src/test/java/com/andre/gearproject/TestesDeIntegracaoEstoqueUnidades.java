@@ -173,6 +173,7 @@ public class TestesDeIntegracaoEstoqueUnidades {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
     @DisplayName("Apagar item de um estoque")
     @Test
     @Order(4)
