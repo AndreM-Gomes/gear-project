@@ -35,6 +35,7 @@ public class ItemEstoqueDTO {
         this.situcao = itemEstoque.getSitucao();
     }
 
+    public ItemEstoqueDTO(){}
     public Integer getId() {
         return id;
     }
