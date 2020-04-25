@@ -9,10 +9,7 @@ public class UnidadeDTO {
     private Integer idUnidade;
     private String nome;
 
-    public UnidadeDTO() {
-        this.idUnidade = null;
-        this.nome = null;
-    }
+    public UnidadeDTO() { }
 
     public UnidadeDTO(Unidade unidade){
         this.idUnidade = unidade.getIdUnidade();

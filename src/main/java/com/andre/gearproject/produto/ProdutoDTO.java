@@ -31,6 +31,7 @@ public class ProdutoDTO {
         this.tipo = produto.getTipo();
     }
 
+    public ProdutoDTO(){}
     public Integer getIdProduto() {
         return idProduto;
     }
